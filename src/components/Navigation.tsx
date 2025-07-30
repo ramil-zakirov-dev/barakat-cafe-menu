@@ -14,6 +14,16 @@ const Navigation = () => {
     { name: "Контакты", path: "/contacts" },
   ];
 
+  const handleNavClick = (path: string) => {
+    if (path.startsWith("/#")) {
+      const targetId = path.substring(2);
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const isActive = (path: string) => {
     if (path === "/") return location.pathname === "/";
     if (path.startsWith("/#")) return location.pathname === "/" && location.hash === path.substring(1);
@@ -34,15 +44,27 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.path) ? "text-primary" : "text-foreground"
-                }`}
-              >
-                {item.name}
-              </Link>
+              item.path.startsWith("/#") ? (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.path)}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    isActive(item.path) ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    isActive(item.path) ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -63,16 +85,31 @@ const Navigation = () => {
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    isActive(item.path) ? "text-primary" : "text-foreground"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                item.path.startsWith("/#") ? (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      handleNavClick(item.path);
+                      setIsMenuOpen(false);
+                    }}
+                    className={`text-sm font-medium transition-colors hover:text-primary text-left ${
+                      isActive(item.path) ? "text-primary" : "text-foreground"
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className={`text-sm font-medium transition-colors hover:text-primary ${
+                      isActive(item.path) ? "text-primary" : "text-foreground"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
             </div>
           </div>
