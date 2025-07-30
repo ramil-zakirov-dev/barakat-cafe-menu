@@ -1,22 +1,14 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import DishCard from "@/components/DishCard";
-import DishModal from "@/components/DishModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { dishes, categories, type Dish } from "@/data/dishes";
+import { dishes, categories } from "@/data/dishes";
 import heroImage from "@/assets/hero-restaurant.jpg";
 
 const Index = () => {
-  const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("Все");
-
-  const handleDishClick = (dish: Dish) => {
-    setSelectedDish(dish);
-    setIsModalOpen(true);
-  };
 
   const filteredDishes = selectedCategory === "Все" 
     ? dishes 
@@ -70,7 +62,7 @@ const Index = () => {
                 <Badge className="absolute top-4 left-4 z-10 bg-primary text-primary-foreground">
                   Спецпредложение
                 </Badge>
-                <DishCard dish={dish} onClick={handleDishClick} />
+                <DishCard dish={dish} />
               </div>
             ))}
           </div>
@@ -113,7 +105,7 @@ const Index = () => {
           {/* Dishes Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredDishes.map((dish) => (
-              <DishCard key={dish.id} dish={dish} onClick={handleDishClick} />
+              <DishCard key={dish.id} dish={dish} />
             ))}
           </div>
         </div>
@@ -166,12 +158,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Dish Detail Modal */}
-      <DishModal
-        dish={selectedDish}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </div>
   );
 };

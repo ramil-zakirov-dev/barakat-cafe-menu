@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 interface Dish {
   id: string;
@@ -11,14 +12,15 @@ interface Dish {
 
 interface DishCardProps {
   dish: Dish;
-  onClick: (dish: Dish) => void;
 }
 
-const DishCard = ({ dish, onClick }: DishCardProps) => {
+const DishCard = ({ dish }: DishCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card 
       className="group cursor-pointer transition-all duration-300 hover:shadow-[var(--shadow-warm)] hover:-translate-y-1"
-      onClick={() => onClick(dish)}
+      onClick={() => navigate(`/dish/${dish.id}`)}
     >
       <CardContent className="p-0">
         <div className="aspect-square overflow-hidden rounded-t-lg">
