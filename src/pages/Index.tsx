@@ -8,7 +8,7 @@ import { dishes, categories } from "@/data/dishes";
 import heroImage from "@/assets/hero-restaurant.jpg";
 
 const Index = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("Все");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Первые блюда");
 
   const filteredDishes = selectedCategory === "Все" 
     ? dishes 
@@ -83,13 +83,13 @@ const Index = () => {
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Button
+            {/* <Button
               variant={selectedCategory === "Все" ? "default" : "outline"}
               onClick={() => setSelectedCategory("Все")}
               className="mb-2"
             >
               Все
-            </Button>
+            </Button> */}
             {categories.map((category) => (
               <Button
                 key={category}
