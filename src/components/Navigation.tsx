@@ -1,11 +1,13 @@
+
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { name: "Главная", path: "/" },
@@ -17,9 +19,23 @@ const Navigation = () => {
   const handleNavClick = (path: string) => {
     if (path.startsWith("/#")) {
       const targetId = path.substring(2);
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      
+      // Если мы не на главной странице, сначала переходим на неё
+      if (location.pathname !== "/") {
+        navigate("/");
+        // Ждем завершения навигации, затем прокручиваем
+        setTimeout(() => {
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // Если уже на главной странице, просто прокручиваем
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   };
