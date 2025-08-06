@@ -6,15 +6,42 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { dishes, categories } from "@/data/dishes";
 import heroImage from "@/assets/hero-restaurant.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Первые блюда");
+
+  const navigate = useNavigate();
 
   const filteredDishes = selectedCategory === "Все" 
     ? dishes 
     : dishes.filter(dish => dish.category === selectedCategory);
 
   const specialOffers = dishes.filter(dish => dish.isSpecial);
+
+  const handleNavClick = (path: string) => {
+    if (path.startsWith("/#")) {
+      const targetId = path.substring(2);
+      
+      // Если мы не на главной странице, сначала переходим на неё
+      if (location.pathname !== "/") {
+        navigate("/");
+        // Ждем завершения навигации, затем прокручиваем
+        setTimeout(() => {
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // Если уже на главной странице, просто прокручиваем
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,7 +65,10 @@ const Index = () => {
           <p className="text-xl md:text-2xl text-foreground mb-8 max-w-2xl mx-auto">
             Аутентичная халяльная кухня в современной атмосфере. Откройте для себя вкусы Востока.
           </p>
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
+          <Button
+            size="lg"
+            onClick={() => handleNavClick('/#menu')} 
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
             Посмотреть меню
           </Button>
         </div>
@@ -117,10 +147,10 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold text-foreground mb-6">
-                О ресторане
+                Баракат-кафе
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Баракат-кафе — это место, где традиции восточной кухни встречаются с современным сервисом. 
+                Это место, где традиции восточной кухни встречаются с современным сервисом. 
                 Мы гордимся тем, что предлагаем только халяльные продукты высочайшего качества.
               </p>
               <p className="text-lg text-muted-foreground mb-8">
@@ -138,7 +168,7 @@ const Index = () => {
                 </Card>
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-lg">5+</CardTitle>
+                    <CardTitle className="text-lg">10+</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">Лет опыта</p>

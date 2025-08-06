@@ -13,7 +13,7 @@ const Contacts = () => {
             Контакты
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Мы рады видеть вас в нашем ресторане. Приходите и насладитесь аутентичной халяльной кухней в уютной атмосфере.
+            Мы рады видеть вас в нашем заведении. Приходите и насладитесь аутентичной халяльной кухней в уютной атмосфере.
           </p>
         </div>
 
@@ -29,9 +29,8 @@ const Contacts = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-foreground">
-                  ул. Мира, 45<br />
-                  г. Москва, 123456<br />
-                  Россия
+                  ул. Ленина, 26А<br />
+                  г. Кукмор<br />
                 </p>
               </CardContent>
             </Card>
@@ -45,8 +44,7 @@ const Contacts = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-foreground">
-                  +7 (495) 123-45-67<br />
-                  +7 (926) 123-45-67
+                  <a href="tel:+79870070809">+7 (987) 007-08-09</a>
                 </p>
               </CardContent>
             </Card>
@@ -60,9 +58,8 @@ const Contacts = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-1">
-                  <p className="text-foreground">Понедельник - Четверг: 10:00 - 22:00</p>
-                  <p className="text-foreground">Пятница - Суббота: 10:00 - 23:00</p>
-                  <p className="text-foreground">Воскресенье: 10:00 - 21:00</p>
+                  <p className="text-foreground">Ежедневно: 09:00 - 22:00</p>
+                  <p className="text-foreground">Пятница перерыв: 11:45 - 12:40</p>
                 </div>
               </CardContent>
             </Card>
@@ -76,8 +73,7 @@ const Contacts = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-foreground">
-                  info@barakat-cafe.ru<br />
-                  booking@barakat-cafe.ru
+                  <a href="mailto:info@barakat-cafe.ru">info@barakat-cafe.ru</a>
                 </p>
               </CardContent>
             </Card>
@@ -87,16 +83,7 @@ const Contacts = () => {
           <div className="h-96 lg:h-full">
             <Card className="h-full">
               <CardContent className="p-0 h-full">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.1964837889934!2d37.61756731572086!3d55.75582608055374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a50b315e573%3A0xa886bf5a3d9b2e68!2sRed%20Square%2C%20Moscow%2C%20Russia!5e0!3m2!1sen!2s!4v1635789012345!5m2!1sen!2s"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, borderRadius: "calc(var(--radius) - 2px)" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Баракат-кафе на карте"
-                ></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1110.1641322153964!2d50.893646!3d56.186004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415f43fb1c6305a1%3A0xf8e9f0cd246d1752!2z0JHQsNGA0LDQutCw0YIg0YXQsNC70Y_Qu9GMINC60LDRhNC1!5e0!3m2!1sru!2sru!4v1754502083780!5m2!1sru!2sru" loading="lazy" width="100%" height="100%" style={{ border: 0, borderRadius: "calc(var(--radius) - 2px)" }} allowFullScreen referrerPolicy="no-referrer-when-downgrade"></iframe>
               </CardContent>
             </Card>
           </div>
@@ -112,7 +99,7 @@ const Contacts = () => {
               <div>
                 <h4 className="font-semibold text-lg mb-2">Парковка</h4>
                 <p className="text-muted-foreground">
-                  Бесплатная парковка для гостей ресторана. Вход с торца здания.
+                  Бесплатная парковка для гостей ресторана.
                 </p>
               </div>
               <div>
