@@ -2,8 +2,9 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { dishes } from "@/data/dishes";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Maximize, X } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Carousel,
   CarouselContent,
@@ -19,12 +20,26 @@ const DishDetails = () => {
   const dish = dishes.find(d => d.id === id);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [fullscreenApi, setFullscreenApi] = useState<CarouselApi>();
+  const [fullscreenCurrent, setFullscreenCurrent] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleDotClick = useCallback((index: number) => {
     if (api) {
       api.scrollTo(index);
     }
   }, [api]);
+
+  const handleFullscreenDotClick = useCallback((index: number) => {
+    if (fullscreenApi) {
+      fullscreenApi.scrollTo(index);
+    }
+  }, [fullscreenApi]);
+
+  const openFullscreen = useCallback(() => {
+    setFullscreenCurrent(current);
+    setIsFullscreen(true);
+  }, [current]);
 
   useEffect(() => {
     if (!api) {
@@ -37,6 +52,24 @@ const DishDetails = () => {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
+
+  useEffect(() => {
+    if (!fullscreenApi) {
+      return;
+    }
+
+    setFullscreenCurrent(fullscreenApi.selectedScrollSnap());
+
+    fullscreenApi.on("select", () => {
+      setFullscreenCurrent(fullscreenApi.selectedScrollSnap());
+    });
+  }, [fullscreenApi]);
+
+  useEffect(() => {
+    if (isFullscreen && fullscreenApi) {
+      fullscreenApi.scrollTo(current);
+    }
+  }, [isFullscreen, fullscreenApi, current]);
 
   if (!dish) {
     return (
@@ -89,6 +122,17 @@ const DishDetails = () => {
                 <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2" />
               </Carousel>
               
+              {/* Кнопка полноэкранного режима */}
+              <Button
+                variant="outline"
+                size="icon"
+                className="absolute top-4 right-4 bg-background/80 hover:bg-background"
+                onClick={openFullscreen}
+                aria-label="Открыть в полноэкранном режиме"
+              >
+                <Maximize className="h-4 w-4" />
+              </Button>
+              
               {/* Индикаторы точек */}
               <div className="flex justify-center gap-2 mt-4">
                 {dish.images.map((_, index) => (
@@ -136,6 +180,58 @@ const DishDetails = () => {
             </div>
           </div>
         </div>
+
+        {/* Полноэкранная галерея */}
+        <Dialog open={isFullscreen} onOpenChange={setIsFullscreen}>
+          <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 border-none bg-black/95">
+            <div className="relative w-full h-[90vh]">
+              <Carousel className="w-full h-full" setApi={setFullscreenApi}>
+                <CarouselContent className="h-full">
+                  {dish.images.map((image, index) => (
+                    <CarouselItem key={index} className="h-full">
+                      <div className="h-full flex items-center justify-center">
+                        <img
+                          src={image}
+                          alt={`${dish.name} - фото ${index + 1}`}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+                <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+              </Carousel>
+              
+              {/* Кнопка закрытия */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-4 right-4 text-white hover:bg-white/20"
+                onClick={() => setIsFullscreen(false)}
+                aria-label="Закрыть полноэкранный режим"
+              >
+                <X className="h-6 w-6" />
+              </Button>
+              
+              {/* Индикаторы точек для полноэкранного режима */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+                {dish.images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleFullscreenDotClick(index)}
+                    className={`w-3 h-3 rounded-full transition-colors duration-200 ${
+                      index === fullscreenCurrent 
+                        ? "bg-white" 
+                        : "bg-white/40 hover:bg-white/60"
+                    }`}
+                    aria-label={`Перейти к фото ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
