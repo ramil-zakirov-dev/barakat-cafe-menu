@@ -1,9 +1,9 @@
+import React, { useState, useCallback, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { dishes } from "@/data/dishes";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import { useState, useCallback, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
