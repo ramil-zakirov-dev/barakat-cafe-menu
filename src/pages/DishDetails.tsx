@@ -3,6 +3,13 @@ import { dishes } from "@/data/dishes";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const DishDetails = () => {
   const { id } = useParams();
@@ -41,12 +48,24 @@ const DishDetails = () => {
         
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="aspect-square overflow-hidden rounded-lg">
-              <img
-                src={dish.image}
-                alt={dish.name}
-                className="w-full h-full object-cover"
-              />
+            <div className="relative">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {dish.images.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="aspect-square overflow-hidden rounded-lg">
+                        <img
+                          src={image}
+                          alt={`${dish.name} - фото ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2" />
+                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2" />
+              </Carousel>
             </div>
             
             <div className="space-y-6">

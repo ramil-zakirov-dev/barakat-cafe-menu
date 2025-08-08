@@ -9,6 +9,7 @@ export interface Dish {
   longDescription: string;
   price: number;
   image: string;
+  images: string[];
   category: string;
   isSpecial?: boolean;
 }
@@ -22,6 +23,7 @@ export const dishes: Dish[] = [
     longDescription: "Традиционный узбекский суп с нежной бараниной, картофелем, морковью, луком и помидорами. Готовится на костном бульоне с добавлением ароматных специй. Подается с свежей зеленью и лепешкой.",
     price: 350,
     image: soupImg,
+    images: [soupImg, pilafficImg, baklavaImg],
     category: "Первые блюда"
   },
   {
@@ -31,6 +33,7 @@ export const dishes: Dish[] = [
     longDescription: "Густой узбекский суп с рисом, говядиной, морковью и луком. Особенность блюда - в специальной обжарке овощей с мясом перед добавлением бульона. Подается горячим с сузьмой (сметаной).",
     price: 320,
     image: soupImg,
+    images: [soupImg, baklavaImg, pilafficImg],
     category: "Первые блюда"
   },
   {
@@ -40,6 +43,7 @@ export const dishes: Dish[] = [
     longDescription: "Среднеазиатский суп с тянутой вручную лапшой, говядиной, болгарским перцем, помидорами и зеленью. Лапша готовится по традиционной технологии, что придает блюду особый вкус и аромат.",
     price: 380,
     image: soupImg,
+    images: [soupImg, pilafficImg, baklavaImg],
     category: "Первые блюда"
   },
 
@@ -51,6 +55,7 @@ export const dishes: Dish[] = [
     longDescription: "Король узбекской кухни - плов из отборного риса с бараниной, морковью, луком и специальным набором специй. Готовится в казане по традиционной рецептуре. Подается с салатом из редьки и зеленым чаем.",
     price: 450,
     image: pilafficImg,
+    images: [pilafficImg, soupImg, baklavaImg],
     category: "Вторые блюда",
     isSpecial: true
   },
@@ -61,6 +66,7 @@ export const dishes: Dish[] = [
     longDescription: "Отборные кусочки молодой баранины, маринованные в специальном соусе с луком и специями. Готовится на открытом огне до золотистой корочки. Подается с маринованным луком, помидорами и лавашом.",
     price: 520,
     image: pilafficImg,
+    images: [pilafficImg, baklavaImg, soupImg],
     category: "Вторые блюда"
   },
   {
@@ -70,6 +76,7 @@ export const dishes: Dish[] = [
     longDescription: "Традиционные манты с начинкой из рубленой баранины и говядины с луком. Тесто раскатывается тонко, начинка готовится из свежего мяса. Готовятся на пару в специальной мантышнице. Подаются со сметаной или соусом.",
     price: 380,
     image: pilafficImg,
+    images: [pilafficImg, soupImg, baklavaImg],
     category: "Вторые блюда"
   },
 
@@ -81,6 +88,7 @@ export const dishes: Dish[] = [
     longDescription: "Традиционная восточная сладость из тончайших слоев теста фило с начинкой из грецких орехов, миндаля и фисташек. Пропитывается ароматным медовым сиропом с розовой водой. Подается охлажденной.",
     price: 180,
     image: baklavaImg,
+    images: [baklavaImg, pilafficImg, soupImg],
     category: "Десерты",
     isSpecial: true
   },
@@ -91,6 +99,7 @@ export const dishes: Dish[] = [
     longDescription: "Натуральная халва собственного приготовления из отборных семян кунжута. Готовится по традиционной рецептуре без добавления искусственных консервантов. Богата витаминами и минералами.",
     price: 150,
     image: baklavaImg,
+    images: [baklavaImg, soupImg, pilafficImg],
     category: "Десерты"
   },
   {
@@ -100,6 +109,7 @@ export const dishes: Dish[] = [
     longDescription: "Традиционная башкирская сладость из мелких кусочков теста, обжаренных в масле и залитых медовым сиропом. Формуется в виде горки и украшается орехами. Подается в качестве десерта к чаю.",
     price: 160,
     image: baklavaImg,
+    images: [baklavaImg, pilafficImg, soupImg],
     category: "Десерты"
   },
 
@@ -111,6 +121,7 @@ export const dishes: Dish[] = [
     longDescription: "Высококачественный зеленый чай из горных районов Узбекистана. Обладает тонким ароматом и освежающим вкусом. Подается в традиционных пиалах с восточными сладостями. Способствует пищеварению.",
     price: 100,
     image: soupImg,
+    images: [soupImg, baklavaImg, pilafficImg],
     category: "Чай и Напитки"
   },
   {
@@ -120,6 +131,7 @@ export const dishes: Dish[] = [
     longDescription: "Традиционный кисломолочный напиток на основе йогурта с добавлением соли и мяты. Отлично утоляет жажду и способствует пищеварению. Подается охлажденным в стеклянных стаканах.",
     price: 80,
     image: soupImg,
+    images: [soupImg, pilafficImg, baklavaImg],
     category: "Чай и Напитки"
   },
   {
@@ -129,6 +141,7 @@ export const dishes: Dish[] = [
     longDescription: "Ароматный компот из отборных сухофруктов: кураги, изюма, инжира и чернослива. Готовится без добавления сахара, сладость достигается естественными фруктовыми сахарами. Подается теплым или охлажденным.",
     price: 120,
     image: soupImg,
+    images: [soupImg, baklavaImg, pilafficImg],
     category: "Чай и Напитки"
   }
 ];
