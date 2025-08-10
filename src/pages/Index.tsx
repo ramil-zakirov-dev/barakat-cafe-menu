@@ -87,12 +87,12 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {specialOffers.map((dish) => (
-              <div key={dish.id} className="relative">
+            {specialOffers.map((dish, index) => (
+              <div key={index} className="relative">
                 <Badge className="absolute top-4 left-4 z-10 bg-primary text-primary-foreground">
                   Спецпредложение
                 </Badge>
-                <DishCard dish={dish} />
+                <DishCard index={index} dish={dish} />
               </div>
             ))}
           </div>
@@ -134,9 +134,12 @@ const Index = () => {
 
           {/* Dishes Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {filteredDishes.map((dish) => (
-              <DishCard key={dish.id} dish={dish} />
-            ))}
+            {filteredDishes.map((dish) => {
+              const index = dishes.findIndex(x => x === dish);
+              return (
+                <DishCard key={index} index={index} dish={dish} />
+              )
+            })}
           </div>
         </div>
       </section>

@@ -1,26 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Dish } from "@/data/dishes";
 import { useNavigate } from "react-router-dom";
 
-interface Dish {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-}
-
 interface DishCardProps {
+  index: number;
   dish: Dish;
 }
 
-const DishCard = ({ dish }: DishCardProps) => {
+const DishCard = ({ index, dish }: DishCardProps) => {
   const navigate = useNavigate();
 
   return (
     <Card 
       className="group cursor-pointer transition-all duration-300 hover:shadow-[var(--shadow-warm)] hover:-translate-y-1"
-      onClick={() => navigate(`/dish/${dish.id}`)}
+      onClick={() => navigate(`/dish/${index}`)}
     >
       <CardContent className="p-0">
         <div className="aspect-square overflow-hidden rounded-t-lg">
@@ -34,9 +27,6 @@ const DishCard = ({ dish }: DishCardProps) => {
           <h3 className="font-semibold text-lg mb-2 text-foreground group-hover:text-primary transition-colors">
             {dish.name}
           </h3>
-          <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
-            {dish.description}
-          </p>
           <div className="flex justify-between items-center">
             <span className="text-xl font-bold text-primary">
               {dish.price} ₽

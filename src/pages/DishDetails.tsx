@@ -15,9 +15,9 @@ import {
 } from "@/components/ui/carousel";
 
 const DishDetails = () => {
-  const { id } = useParams();
+  const { index } = useParams();
   const navigate = useNavigate();
-  const dish = dishes.find(d => d.id === id);
+  const dish = dishes[index];
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [fullscreenApi, setFullscreenApi] = useState<CarouselApi>();
