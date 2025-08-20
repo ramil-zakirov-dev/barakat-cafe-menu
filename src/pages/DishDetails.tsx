@@ -157,8 +157,8 @@ const DishDetails = () => {
                     {dish.name}
                   </h1>
                   {dish.isSpecial && (
-                    <span className="px-3 py-1 bg-gradient-primary text-white rounded-full text-sm font-medium">
-                      Спецпредложение
+                    <span className="px-3 py-1 bg-gradient-primary text-primary rounded-full text-sm font-medium">
+                      Блюдо дня
                     </span>
                   )}
                 </div>

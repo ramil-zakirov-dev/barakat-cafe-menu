@@ -12,7 +12,7 @@ const Navigation = () => {
   const navItems = [
     { name: "Главная", path: "/" },
     { name: "Меню", path: "/#menu" },
-    { name: "Спецпредложения", path: "/#offers" },
+    { name: "Блюдо дня", path: "/#offers" },
     { name: "Контакты", path: "/contacts" },
   ];
 
