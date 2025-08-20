@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import DishCard from "@/components/DishCard";
 import { Button } from "@/components/ui/button";
@@ -6,18 +5,25 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { dishes, categories } from "@/data/dishes";
 import heroImage from "@/assets/hero-restaurant.jpg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Index = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("Первые блюда");
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const selectedCategory = searchParams.get('category') || "Первые блюда";
 
   const filteredDishes = selectedCategory === "Все" 
     ? dishes 
     : dishes.filter(dish => dish.category === selectedCategory);
 
   const specialOffers = dishes.filter(dish => dish.isSpecial);
+
+  const handleCategoryChange = (category: string) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('category', category);
+    setSearchParams(newSearchParams);
+  };
 
   const handleNavClick = (path: string) => {
     if (path.startsWith("/#")) {
@@ -124,7 +130,7 @@ const Index = () => {
               <Button
                 key={category}
                 variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => handleCategoryChange(category)}
                 className="mb-2"
               >
                 {category}
