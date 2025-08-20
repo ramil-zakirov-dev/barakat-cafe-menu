@@ -119,13 +119,6 @@ const Index = () => {
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {/* <Button
-              variant={selectedCategory === "Все" ? "default" : "outline"}
-              onClick={() => setSelectedCategory("Все")}
-              className="mb-2"
-            >
-              Все
-            </Button> */}
             {categories.map((category) => (
               <Button
                 key={category}
